@@ -1,0 +1,20 @@
+Karate is the only open-source tool to combine API test-automation, mocks, performance-testing and even UI automation into a single, unified framework. The BDD syntax popularized by Cucumber is language-neutral, and easy for even non-programmers. Powerful JSON & XML assertions are built-in, and you can run tests in parallel for speed.
+
+Test execution and report generation feels like any standard Java project. But there's also a stand-alone executable for teams not comfortable with Java. You don't have to compile code. Just write tests in a simple, readable syntax - carefully designed for HTTP, JSON, GraphQL and XML. And you can mix API and UI test-automation within the same test script.
+If you are familiar with Cucumber / Gherkin, the big difference here is that you don't need to write extra "glue" code or Java "step definitions" !
+Karate is designed so that you can choose between the Apache or Jersey HTTP client implementations.
+
+So you need two <dependencies>:
+
+<dependency>
+    <groupId>com.intuit.karate</groupId>
+    <artifactId>karate-apache</artifactId>
+    <version>0.9.5</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>com.intuit.karate</groupId>
+    <artifactId>karate-junit5</artifactId>
+    <version>0.9.5</version>
+    <scope>test</scope>
+</dependency>
