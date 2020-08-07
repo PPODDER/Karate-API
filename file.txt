@@ -1,0 +1,49 @@
+Steps to be followed:
+1)Create a maven project -mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+2)Add the karate dependency along with other dependency needed for your project in POM file
+3)Create a package and under package create a feature file and its input file either json/xml along with its runner file.
+*************************************************************
+
+Http Basic Authentication Example:
+function(creds) {
+  var temp = creds.username + ':' + creds.password;
+  var Base64 = Java.type("java.util.Base64");
+  var encoded = Base64.getEncoder().encodeToString(temp.bytes);
+  return 'Basic ' + encoded;
+}
+And here’s how it works in a test-script using the header keyword.
+ header Authorization = call read('basic-auth.js') { username: 'john', password: 'secret' }
+*******************************************
+Sample file:-
+Feature: Sample Feature
+
+Background:
+* url 'http://localhost:8080'
+
+Scenario Outline: given circuit name, validate country
+
+Given path 'api/f1/circuits/<name>.json'
+When method get
+Then match $.MRData.CircuitTable.Circuits[0].Location.country == '<country>'
+
+Examples:
+| name   | country  |
+| monza  | Italy    |
+| spa    | Belgium  |
+| sepang | Malaysia |
+
+Scenario Outline: given race number, validate number of pitstops for Max Verstappen in 2015
+
+Given path 'api/f1/2015/<race>/drivers/max_verstappen/pitstops.json'
+When method get
+Then assert response.MRData.RaceTable.Races[0].PitStops.length == <stops>
+
+Examples:
+| race | stops |
+| 1    | 1     |
+| 2    | 3     |
+| 3    | 2     |
+| 4    | 2     |
+Reference:-https://venkatramanareddy.github.io/karate/
+
+
